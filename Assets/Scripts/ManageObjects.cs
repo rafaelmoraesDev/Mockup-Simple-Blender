@@ -5,15 +5,22 @@ using UnityEngine;
 public class ManageObjects : MonoBehaviour
 {
     public GameObject PrefabCube;
+
+    private ControlCam controlCam;
+
+    private void Start()
+    {
+        controlCam = FindObjectOfType<ControlCam>();
+
+    }
     // Update is called once per frame
     void LateUpdate()
     {
         if (Input.GetButtonDown("Fire2"))
         {
-            Vector3 cursorPos = Input.mousePosition;
-            GameObject go = Instantiate(PrefabCube, cursorPos, Quaternion.identity);
-            go.transform.position = new Vector3(cursorPos.x, cursorPos.y);
-            //Generator();
+            //Vector3 cursorPos = Input.mousePosition;
+            //GameObject go = Instantiate(PrefabCube, controlCam.IntersectPoint, Quaternion.identity);
+           
         }
     }
 
