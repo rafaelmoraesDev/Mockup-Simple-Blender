@@ -5,31 +5,39 @@ using UnityEngine;
 public class ManageObjects : MonoBehaviour
 {
     public GameObject PrefabCube;
+    public GameObject PrefabSphere;
+    public GameObject PrefabCapsule;
 
-    private ControlCam controlCam;
+    public GameObject PrefabCubePlaceHolder;
+    public GameObject PrefabSpherePlaceHolder;
+    public GameObject PrefabCapsulePlaceHolder;
+
+    private RayCam rayCam;
 
     private void Start()
     {
-        controlCam = FindObjectOfType<ControlCam>();
-
+        rayCam = Camera.main.GetComponent<RayCam>();
     }
-    // Update is called once per frame
-    void LateUpdate()
+    public void SetPLaceHolder()
     {
-        if (Input.GetButtonDown("Fire2"))
-        {
-            //Vector3 cursorPos = Input.mousePosition;
-            //GameObject go = Instantiate(PrefabCube, controlCam.IntersectPoint, Quaternion.identity);
-           
-        }
+        GameObject placeHolder = Instantiate(PrefabCubePlaceHolder, rayCam.IntersectPoint, Quaternion.identity);
     }
+    public void SetNewCube()
+    {
+        //GameObject cube = Instantiate(PrefabCube, Vector3.zero, Quaternion.identity);
+        GameObject cube = Instantiate(PrefabCube, rayCam.IntersectPoint, Quaternion.identity);
+    }
+    public void SetNewSphere()
+    {
+        //GameObject sphere = Instantiate(PrefabSphere, Vector3.zero, Quaternion.identity);
+        GameObject sphere = Instantiate(PrefabSphere, rayCam.IntersectPoint, Quaternion.identity);
 
-    //private void Generator()
-    //{
-    //    GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-    //    go.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //    go.AddComponent<MeshCollider>();
-    //    go.AddComponent<FollowPointer>();
-    //}
+    }
+    public void SetNewCapsule()
+    {
+        //GameObject capsule = Instantiate(PrefabCapsule, Vector3.zero, Quaternion.identity);
+        GameObject capsule = Instantiate(PrefabCapsule, rayCam.IntersectPoint, Quaternion.identity);
+
+    }
 
 }

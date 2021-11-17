@@ -5,31 +5,28 @@ using UnityEngine;
 public class FollowPointer : MonoBehaviour
 {
     //to check if it was setted in a place
-    private bool setted;
+    public bool Setted;
+
     private Camera cam;
+    private Ray ray;
+    private RaycastHit hit;
+
+    [SerializeField]
+    private float folowSpeed;
+
     private void Awake()
     {
         cam = FindObjectOfType<Camera>();
     }
-
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        // TODO if the object is not setted it could move freely, else set in place clicked
-        if (!setted)
+        ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit raycastHit))
+            if (hit.collider.CompareTag(Tags.Grid))
             {
-                transform.position = raycastHit.point;
+                transform.position = Vector3.MoveTowards(transform.position, hit.point, Time.deltaTime * folowSpeed);
             }
         }
-        if (Input.GetButtonDown("Fire1"))
-        {
-            setted = !setted;
-            this.enabled = !enabled;
-        }
     }
-
-
 }
